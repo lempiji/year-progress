@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今年の進行状況</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #progress {
+            font-size: 2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>今年が何%経過したか</h1>
+    <div id="progress">計算中...</div>
+
+    <script>
+        function calculateYearProgress() {
+            const now = new Date();
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            const endOfYear = new Date(now.getFullYear() + 1, 0, 1);
+            const elapsed = now - startOfYear;
+            const total = endOfYear - startOfYear;
+            const percentage = (elapsed / total) * 100;
+            return percentage.toFixed(2); // 0.01%単位
+        }
+
+        function updateProgress() {
+            const progressElement = document.getElementById("progress");
+            progressElement.textContent = `${calculateYearProgress()}%`;
+        }
+
+        // 初回更新と1秒ごとの更新
+        updateProgress();
+        setInterval(updateProgress, 1000);
+    </script>
+</body>
+</html>
